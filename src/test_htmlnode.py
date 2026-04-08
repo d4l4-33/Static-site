@@ -17,7 +17,7 @@ class TestHTMLNode(unittest.TestCase):
         
     def test_repr(self):
         node = HTMLNode("p", "bananamobile", None, props_dict)
-        self.assertEqual(node.__repr__(), "p, bananamobile, None, {'href': 'https://www.google.com', 'target': '_blank'}")
+        self.assertEqual(node.__repr__(), "HTMLNode(p, bananamobile, None, {'href': 'https://www.google.com', 'target': '_blank'})")
     
     def test_props_to_html(self): ##d4l4 Ver
         node = HTMLNode("p", "bananamobile", None, props_dict)
@@ -42,13 +42,13 @@ class TestHTMLNode(unittest.TestCase):
         node = LeafNode("p", "Hello, world!")
         self.assertEqual(node.to_html(), "<p>Hello, world!</p>")
 
-    def test_leaf_to_html_notag(self):
-        node = LeafNode(None, "Value")
-        self.assertEqual(node.to_html(), "Value")
+    def test_leaf_to_html_no_tag(self):
+        node = LeafNode(None, "Hello, world!")
+        self.assertEqual(node.to_html(), "Hello, world!")
 
     def test_leafnode_repr(self):
         node = LeafNode("p", "Hello, world!", "https://www.bananachicken.notrealurl")
-        self.assertEqual(node.__repr__(), "p, Hello, world!, https://www.bananachicken.notrealurl")
+        self.assertEqual(node.__repr__(), "LeafNode(p, Hello, world!, https://www.bananachicken.notrealurl)")
 
     #Parent Nodes   
 

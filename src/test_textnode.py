@@ -32,7 +32,7 @@ class TestTextNode(unittest.TestCase):
         self.assertEqual(html_node.tag, "a")
         self.assertEqual(html_node.value, "This is a link")
         self.assertEqual(html_node.props, "href")
-        self.assertEqual(html_node.__repr__(), "a, This is a link, href")
+        self.assertEqual(html_node.__repr__(), "LeafNode(a, This is a link, href)")
 
 if __name__ == "__main__":
     unittest.main()
