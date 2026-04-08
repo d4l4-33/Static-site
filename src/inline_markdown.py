@@ -70,10 +70,21 @@ def split_nodes_link(old_nodes):
         if original_text != "":
             result.append(TextNode(original_text, TextType.TEXT))
     return result
-"""
-node = TextNode(
-            "This is text with a [link](https://boot.dev) and [another link](https://wikipedia.org) with text that follows",
-            TextType.TEXT,
-        )
-print(split_nodes_link([node]))
-"""
+
+def text_to_textnodes(text):
+    nodes = split_nodes_delimiter([TextNode(text, TextType.TEXT)], "**", TextType.BOLD)
+    nodes = split_nodes_delimiter(nodes, "_", TextType.ITALIC)
+    nodes = split_nodes_delimiter(nodes, "`", TextType.CODE)
+    nodes = split_nodes_image(nodes)
+    nodes = split_nodes_link(nodes)
+    return nodes
+
+
+def markdown_to_blocks(markdown):
+    nodes = []
+    blocks = markdown.split("\n\n")
+    for block in blocks:
+        if block == "":
+            continue
+        nodes.append(block.strip())
+    return nodes

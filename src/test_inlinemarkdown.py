@@ -1,6 +1,14 @@
 import unittest
 
-from inline_markdown import split_nodes_delimiter, extract_markdown_images, extract_markdown_links, split_nodes_image, split_nodes_link
+from inline_markdown import (
+    split_nodes_delimiter, 
+    extract_markdown_images, 
+    extract_markdown_links, 
+    split_nodes_image, 
+    split_nodes_link, 
+    text_to_textnodes,
+    markdown_to_blocks,
+)
 from textnode import TextNode, TextType
 
 
@@ -44,11 +52,6 @@ class testSplitNodes(unittest.TestCase):
             ],
             test,
         )
-    """
-    def test_error(self):
-        self.assertRaises(ValueError, split_nodes_delimiter([test_4], "**", TextType.TEXT))
-    """
-    #Extract Markdown
 
     def test_extract_markdown_images(self):
         matches = extract_markdown_images(
@@ -124,6 +127,68 @@ class testSplitNodes(unittest.TestCase):
             new_nodes,
         )
 
+    def test_text_to_textnodes(self):
+        text = "This is **text** with an _italic_ word and a `code block` and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)"
+        result = text_to_textnodes(text)
+        self.assertListEqual(
+            [
+                TextNode("This is ", TextType.TEXT, None),
+                TextNode("text", TextType.BOLD, None), 
+                TextNode(" with an ", TextType.TEXT, None), 
+                TextNode("italic", TextType.ITALIC, None), 
+                TextNode(" word and a ", TextType.TEXT, None), 
+                TextNode("code block", TextType.CODE, None), 
+                TextNode(" and an ", TextType.TEXT, None), 
+                TextNode("obi wan image", TextType.IMAGE, "https://i.imgur.com/fJRm4Vk.jpeg"), 
+                TextNode(" and a ", TextType.TEXT, None), 
+                TextNode("link", TextType.LINK, "https://boot.dev"),
+            ],  
+            result,
+            )
+        
+    def test_text_to_textnodes_unordered(self):
+        text = "![imagetext](linktoimage.com), that was an _imagelink_ and **this** is a [link](https://wieeieiieiie.org)"
+        result = text_to_textnodes(text)
+        self.assertListEqual(
+            [
+                TextNode("imagetext", TextType.IMAGE, "linktoimage.com"),
+                TextNode(", that was an ", TextType.TEXT, None),
+                TextNode("imagelink", TextType.ITALIC, None),
+                TextNode(" and ", TextType.TEXT, None),
+                TextNode("this", TextType.BOLD, None),
+                TextNode(" is a ", TextType.TEXT, None),
+                TextNode("link", TextType.LINK, "https://wieeieiieiie.org"),
+            ],
+            result,
+        )
+
+    def test_markdown_to_blocks(self):
+        md = """
+This is **bolded** paragraph
+
+This is another paragraph with _italic_ text and `code` here
+This is the same paragraph on a new line
+
+- This is a list
+- with items
+"""
+        blocks = markdown_to_blocks(md)
+        self.assertEqual(
+            blocks,
+            [
+                "This is **bolded** paragraph",
+                "This is another paragraph with _italic_ text and `code` here\nThis is the same paragraph on a new line",
+                "- This is a list\n- with items",
+            ],
+        )
     
+    def test_empty_to_blocks(self):
+        md = ""
+        blocks = markdown_to_blocks(md)
+        self.assertEqual(
+            blocks,
+            [
+            ],
+        )
 if __name__ == "__main__":
     unittest.main()
