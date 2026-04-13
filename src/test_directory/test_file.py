@@ -1,1 +1,0 @@
-#Test, this is to ensure that the copy takes files inside directories
