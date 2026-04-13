@@ -13,7 +13,6 @@ from inline_markdown import (
     text_to_textnodes,
 )
 
-
 class BlockType(Enum):
     PARAGRAPH = "paragraph"
     HEADING = "heading"
@@ -21,15 +20,6 @@ class BlockType(Enum):
     QUOTE = "quote"
     ULIST = "unorderded_list"
     OLIST = "ordered_list"
-
-def extract_title(markdown):
-    blocks = markdown_to_blocks(markdown)
-    for block in blocks:
-        if block.startswith("##"):
-            continue
-        if block.startswith("#"):
-            return block.strip("# ")
-    raise Exception("ERROR: No header found in markdown")
 
 def markdown_to_html_node(markdown):
     blocks = markdown_to_blocks(markdown)

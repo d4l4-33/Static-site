@@ -29,7 +29,6 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
         result.extend(split_nodes)
     return result
 
-
 def split_nodes_image(old_nodes):
     result = []
     for node in old_nodes:
@@ -54,7 +53,6 @@ def split_nodes_image(old_nodes):
             result.append(TextNode(original_text, TextType.TEXT))
     return result
 
-
 def split_nodes_link(old_nodes):
     result = []
     for node in old_nodes:
@@ -75,7 +73,6 @@ def split_nodes_link(old_nodes):
         if original_text != "":
             result.append(TextNode(original_text, TextType.TEXT))
     return result
-
 
 def extract_markdown_images(text):
     return re.findall(r"!\[(.*?)\]\((.*?)\)", text)

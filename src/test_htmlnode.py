@@ -23,8 +23,6 @@ class TestHTMLNode(unittest.TestCase):
         node = HTMLNode("p", "bananamobile", None, props_dict)
         self.assertEqual(node.props_to_html(), props_to_html_expected)
 
-    #Leaf Nodes
-
     def test_leaf_to_html_p(self):
         node = LeafNode("p", "Hello, world!")
         self.assertEqual(node.to_html(), "<p>Hello, world!</p>")
@@ -36,8 +34,6 @@ class TestHTMLNode(unittest.TestCase):
     def test_leafnode_repr(self):
         node = LeafNode("p", "Hello, world!", "https://www.bananachicken.notrealurl")
         self.assertEqual(node.__repr__(), "LeafNode(p, Hello, world!, https://www.bananachicken.notrealurl)")
-
-    #Parent Nodes   
 
     def test_to_html_with_children(self):
         child_node1 = LeafNode("span", "child")

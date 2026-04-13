@@ -10,7 +10,6 @@ from inline_markdown import (
 )
 from textnode import TextNode, TextType
 
-
 test_1 = TextNode("Why is _Alakazam_ magic?", TextType.TEXT)
 test_2 = TextNode("Alakazam is a **BIG** Word", TextType.TEXT)
 test_3 = TextNode("This will hopfully _**be unaltered**_", TextType.CODE)
@@ -160,7 +159,6 @@ class testSplitNodes(unittest.TestCase):
             ],
             result,
         )
-
 
 if __name__ == "__main__":
     unittest.main()
