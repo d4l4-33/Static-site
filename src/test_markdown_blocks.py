@@ -46,7 +46,8 @@ This is the same paragraph on a new line
 This is a paragraph of text. It has some **bold** and _italic_ words inside of it.
 
 ```
-if this is code: show this shiet```
+if this is code: show this shiet
+```
 
 > That's the finest code I've ever seen
 

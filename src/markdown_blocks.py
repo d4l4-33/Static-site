@@ -2,8 +2,6 @@ from enum import Enum
 import re
 
 from htmlnode import (
-    HTMLNode,
-    LeafNode,
     ParentNode,
 )
 from textnode import (
@@ -24,6 +22,14 @@ class BlockType(Enum):
     ULIST = "unorderded_list"
     OLIST = "ordered_list"
 
+def extract_title(markdown):
+    blocks = markdown_to_blocks(markdown)
+    for block in blocks:
+        if block.startswith("##"):
+            continue
+        if block.startswith("#"):
+            return block.strip("# ")
+    raise Exception("ERROR: No header found in markdown")
 
 def markdown_to_html_node(markdown):
     blocks = markdown_to_blocks(markdown)
@@ -39,6 +45,7 @@ def markdown_to_blocks(markdown):
     for block in blocks:
         if block == "":
             continue
+        block = block.strip()
         nodes.append(block.strip())
     return nodes
 
@@ -138,20 +145,5 @@ def quote_to_html_node(block):
     children = text_to_children(content)
     return ParentNode("blockquote", children)
 
-md = """
 
-### HEADING
 
-This is **bolded** paragraph
-text in a p
-tag here
-
-This is another paragraph with _italic_ text and `code` here
-
-```
-A Code Block
-```
-
-"""
-print_it = markdown_to_html_node(md)
-#print(print_it.to_html)

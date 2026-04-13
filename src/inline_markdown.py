@@ -38,6 +38,9 @@ def split_nodes_image(old_nodes):
             continue
         original_text = node.text
         images = extract_markdown_images(original_text)
+        if len(images) == 0:
+            result.append(node)
+            continue
         for image in images:
             image_text, image_url = image[0], image[1]
             text_split = original_text.split(f"![{image_text}]({image_url})", 1)

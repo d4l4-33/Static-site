@@ -1,16 +1,16 @@
 import os
 import shutil
 from recursive_file_copy import recursive_file_copy
-
-STATIC_PATH = "./static"
-PUBLIC_PATH = "./public"
+from generate_page import generate_page
 
 def main():
     
-    if os.path.exists(PUBLIC_PATH):
-        shutil.rmtree(PUBLIC_PATH)
+    if os.path.exists("./public"):
+        shutil.rmtree("./public")
 
-    recursive_file_copy(STATIC_PATH, PUBLIC_PATH)
+    recursive_file_copy("./static", "./public")
+    generate_page("./content/index.md", "./template.html", "./public/index.html")
+    
         
 
 if __name__ == "__main__":

@@ -23,19 +23,6 @@ class TestHTMLNode(unittest.TestCase):
         node = HTMLNode("p", "bananamobile", None, props_dict)
         self.assertEqual(node.props_to_html(), props_to_html_expected)
 
-    """ ##Lane Ver
-    def test_to_html_props(self): 
-        node = HTMLNode(
-            "div",
-            "Hello, world!",
-            None,
-            {"class": "greeting", "href": "https://www.boot.dev"},
-        )
-        self.assertEqual(
-            node.props_to_html(),
-            ' class="greeting" href="https://www.boot.dev"',
-        )
-    """
     #Leaf Nodes
 
     def test_leaf_to_html_p(self):
@@ -67,11 +54,6 @@ class TestHTMLNode(unittest.TestCase):
             parent_node.to_html(),
             "<div><span><b>grandchild</b></span></div>",
     )
-
-
-
-
-
 
 if __name__ == "__main__":
     unittest.main()
