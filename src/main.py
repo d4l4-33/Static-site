@@ -15,7 +15,7 @@ def main():
         shutil.rmtree("./docs")
 
     recursive_file_copy("./static", "./docs")
-    generate_pages_recursive("./content", "./template.html", "./docs", basepath[0])
+    generate_pages_recursive("./content", "./template.html", "./docs", basepath)
     
 if __name__ == "__main__":
     main()
